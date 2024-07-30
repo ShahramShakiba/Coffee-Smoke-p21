@@ -10,7 +10,7 @@ import vertexSmoke from './shaders/coffeeSmoke/vertex.glsl';
 import fragmentSmoke from './shaders/coffeeSmoke/fragment.glsl';
 
 const canvas = document.querySelector('canvas.webgl');
-const gui = new GUI();
+const gui = new GUI().close();
 const scene = new THREE.Scene();
 
 let width = window.innerWidth;
@@ -22,7 +22,7 @@ const textureLoader = new THREE.TextureLoader();
 const gltfLoader = new GLTFLoader();
 
 //================ Camera ======================
-const camera = new THREE.PerspectiveCamera(25, width / height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
 camera.position.x = 8;
 camera.position.y = 10;
 camera.position.z = 12;
