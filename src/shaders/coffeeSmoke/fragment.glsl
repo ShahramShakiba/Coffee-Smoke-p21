@@ -16,8 +16,15 @@ void main() {
   //=== Remap - 03
   smoke = smoothstep(0.4, 1.0, smoke);
 
+  //=== Fade edges
+  smoke *= smoothstep(0.0, 0.1, vUv.x);
+  smoke *= smoothstep(1.0, 0.9, vUv.x);
+
+  smoke *= smoothstep(0.0, 0.1, vUv.y);
+  smoke *= smoothstep(1.0, 0.4, vUv.y);
+
  //==== Final Color
-  gl_FragColor = vec4(1.0, 1.0, 1.0, smoke);
+  gl_FragColor = vec4(0.6, 0.3, 0.2, smoke);
 
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
@@ -35,7 +42,6 @@ void main() {
   - in a way, we want to create holes where it's dark because we want to see through the smoke where it's dark and to create more realistic smoke effect, that's why we put smoke on the "alpha-channel"
 
   - also, add (transparent = true) on the material  */
-
 
 
 /* ************ smokeUv
@@ -63,3 +69,14 @@ void main() {
   * smoothstep returns a 0 to 1 clamped value
 */
 
+
+/* ********** Fade Edges
+- we want the smoke to be be at 0 at the very edge and to go up very fast to 1, accross "X" and "Y" axsis
+
+smoke = 1.0;
+  smoke *= smoothstep(0.0, 0.1, vUv.x);
+  smoke *= smoothstep(1.0, 0.9, vUv.x);
+
+  smoke *= smoothstep(0.0, 0.1, vUv.y);
+  smoke *= smoothstep(1.0, 0.4, vUv.y);
+*/
