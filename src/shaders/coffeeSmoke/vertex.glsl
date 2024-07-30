@@ -3,14 +3,7 @@ uniform sampler2D uTexture;
 
 varying vec2 vUv;
 
-vec2 rotate2D(vec2 value, float angle) {
-  float s = sin(angle);
-  float c = cos(angle);
-
-  mat2 m = mat2(c, s, -s, c);
-
-  return m * value;
-}
+#include ../includes/rotate2D;
 
 void main() {
   vec3 newPosition = position;
