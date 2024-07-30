@@ -75,6 +75,8 @@ smokeGeometry.scale(1.5, 6, 1.5);
 
 //==== Perlin Texture
 const perlinTexture = textureLoader.load('./perlin.png');
+perlinTexture.wrapS = THREE.RepeatWrapping;
+perlinTexture.wrapT = THREE.RepeatWrapping;
 
 //==== Material
 const smokeMaterial = new THREE.ShaderMaterial({
@@ -83,6 +85,7 @@ const smokeMaterial = new THREE.ShaderMaterial({
 
   uniforms: {
     uTexture: new THREE.Uniform(perlinTexture),
+    uTime: new THREE.Uniform(0),
   },
 
   side: THREE.DoubleSide,
@@ -98,6 +101,8 @@ scene.add(smoke);
 //================= Animate ======================
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  smokeMaterial.uniforms.uTime.value = elapsedTime;
 
   controls.update();
   renderer.render(scene, camera);
