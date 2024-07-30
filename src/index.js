@@ -73,11 +73,21 @@ const smokeGeometry = new THREE.PlaneGeometry(1, 1, 16, 64);
 smokeGeometry.translate(0, 0.5, 0);
 smokeGeometry.scale(1.5, 6, 1.5);
 
+//==== Perlin Texture
+const perlinTexture = textureLoader.load('./perlin.png');
+
 //==== Material
 const smokeMaterial = new THREE.ShaderMaterial({
-  wireframe: true,
   vertexShader: vertexSmoke,
   fragmentShader: fragmentSmoke,
+
+  uniforms: {
+    uTexture: new THREE.Uniform(perlinTexture),
+  },
+
+  side: THREE.DoubleSide,
+  transparent: true,
+  // wireframe: true,
 });
 
 //==== Mesh
