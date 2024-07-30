@@ -13,7 +13,7 @@
 ## ☕️ Coffee Mug Smoke using Shader 
 <!--------- Video --------->
 
-
+https://github.com/user-attachments/assets/c9a1e1c2-0c49-41c5-b91a-e959c00d9dc2
 
 <br/> 
 
@@ -70,7 +70,7 @@ Join the Coffee Smoke Project and discover:
 <br/>
 
 ### Live Demo
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Check out the live demo <a href="" target="_blank"> _here_ </a>.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Check out the live demo <a href="https://coffee-smoke-shahram.netlify.app/" target="_blank"> _here_ </a>.
 
 <br/> 
 
