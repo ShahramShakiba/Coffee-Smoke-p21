@@ -65,6 +65,23 @@ gltfLoader.load('./bakedModel.glb', (gltf) => {
   scene.add(gltf.scene);
 });
 
+//================== Smoke =======================
+//==== Geometry
+const smokeGeometry = new THREE.PlaneGeometry(1, 1, 16, 64);
+smokeGeometry.translate(0, 0.5, 0);
+smokeGeometry.scale(1.5, 6, 1.5);
+
+//==== Material
+const smokeMaterial = new THREE.MeshBasicMaterial({
+  color: 'cyan',
+  wireframe: true,
+});
+
+//==== Mesh
+const smoke = new THREE.Mesh(smokeGeometry, smokeMaterial);
+smoke.position.y = 1.83;
+scene.add(smoke);
+
 //================= Animate ======================
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
