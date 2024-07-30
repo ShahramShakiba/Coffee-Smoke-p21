@@ -15,22 +15,34 @@ vec2 rotate2D(vec2 value, float angle) {
 void main() {
   vec3 newPosition = position;
 
-  //======= Twist 
+  //========== Twist 
   float twistPerlin = texture(
       uTexture, 
       vec2(0.5, uv.y * 0.2 - uTime * 0.009)
-    ).r;
+  ).r;
 
   float angle = twistPerlin * 10.0; 
   newPosition.xz = rotate2D(newPosition.xz, angle);
 
-  //======= Final Position
+  //========== Wind 
+  vec2 windOffset = vec2(
+      texture(uTexture, vec2(0.25, uTime * 0.01)).r - 0.5, 
+      texture(uTexture, vec2(0.75, uTime * 0.01)).r - 0.5 
+  );
+
+  windOffset *= pow(uv.y, 2.0) * 10.0; 
+  newPosition.xz += windOffset;
+
+  //========= Final Position
   gl_Position = 
     projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 
-  //======= Varyings
+  //========= Varyings
   vUv = uv;
 }
+
+
+
 
 
 
@@ -73,4 +85,28 @@ void main() {
 
 * float angle = twistPerlin * 10.0;
   - the angle is quite small and there is not enough variation, we need the angle be high, so we get full rotation, that's why we multiply it by 10
+*/
+
+
+/* **********  Wind
+?  texture(uTexture, vec2(0.25, uTime * 0.01)).r - 0.5 
+` - to get different pattern this time we set it to 0.25 instead 0.5
+
+  - wind effect goes from -0.5 to 0.5
+  - it's kind of having an effect that moves from left to right and vice versa
+
+
+*  windOffset *= pow(uv.y, 2.0) * 10.0; 
+  - uv.y:
+    we want to steam to be at the center of our mug, it start from there and then as it goes up it gets effected by the wind
+
+  - pow(...)
+  - it starts slowely and gets fast as it goes up, it's kind of take more time to gets up
+  - it's kind of more power will make the steam less affected by the wind.
+
+
+  * vec2 windOffset = vec2(
+  *    texture(uTexture, vec2(0.25, uTime * 0.01)).r - 0.5,  // X
+  *    texture(uTexture, vec2(0.75, uTime * 0.01)).r - 0.5   // Z
+  );
 */
