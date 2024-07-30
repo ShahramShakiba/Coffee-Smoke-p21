@@ -46,7 +46,7 @@ void main() {
 
 
 
-/* ********** Twist
+/* **************** Twist
 - we want the vertices to rotate around the center of the plane and to have that rotation changing according to the elevation
 
 - this means that the vertices are going to rotate on an xz plane along to the y axis
@@ -88,7 +88,7 @@ void main() {
 */
 
 
-/* **********  Wind
+/* ******************  Wind
 ?  texture(uTexture, vec2(0.25, uTime * 0.01)).r - 0.5 
 ` - to get different pattern this time we set it to 0.25 instead 0.5
 
@@ -109,4 +109,14 @@ void main() {
   *    texture(uTexture, vec2(0.25, uTime * 0.01)).r - 0.5,  // X
   *    texture(uTexture, vec2(0.75, uTime * 0.01)).r - 0.5   // Z
   );
+*/
+
+
+/* ******************** Transparency occluding(blocking)
+  - if you look from some angle, it seems that the plane is occluding itself
+
+  - it's because the plane is writing on the depth buffer and will occlude anything behind it, including itself
+
+  * to fix that in js, material section add:
+    depthWrite: false,
 */
