@@ -6,6 +6,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import GUI from 'lil-gui';
 import * as THREE from 'three';
+import vertexSmoke from './shaders/coffeeSmoke/vertex.glsl';
+import fragmentSmoke from './shaders/coffeeSmoke/fragment.glsl';
 
 const canvas = document.querySelector('canvas.webgl');
 const gui = new GUI();
@@ -72,9 +74,10 @@ smokeGeometry.translate(0, 0.5, 0);
 smokeGeometry.scale(1.5, 6, 1.5);
 
 //==== Material
-const smokeMaterial = new THREE.MeshBasicMaterial({
-  color: 'cyan',
+const smokeMaterial = new THREE.ShaderMaterial({
   wireframe: true,
+  vertexShader: vertexSmoke,
+  fragmentShader: fragmentSmoke,
 });
 
 //==== Mesh
